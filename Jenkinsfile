@@ -18,8 +18,8 @@ pipeline{
                 cd /api
                 docker build -t ${DOCKER_REGISTRY}/flask_app:${BUILD_TAG} .
                 '''
+                 }
             }
-        }
         }
     }
 }
