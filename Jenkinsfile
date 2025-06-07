@@ -6,12 +6,12 @@ pipeline{
     }
 
     stages {
-        stage ('Checkout') {
+        stage('Checkout') {
             steps {
                 checkout scm
                 echo 'checked out code'
             }
-        stage ('Build'){
+        stage('Build'){
             steps {
                 echo 'Building api application'
                 sh '''
