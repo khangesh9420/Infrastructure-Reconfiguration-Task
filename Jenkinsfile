@@ -30,7 +30,7 @@ pipeline{
                     -Dsonar.projectKey=flask_app \
                     -Dsonar.sources=. \
                     -Dsonar.host.url=http://your-sonarqube-server:9000 \
-                    -Dsonar.login=your-sonarqube-token
+                    -Dsonar.login=sonarqube-token
                 '''
                 }
             }
