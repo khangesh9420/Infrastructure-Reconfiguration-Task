@@ -10,9 +10,10 @@ pipeline{
             steps {
                 checkout scm
                 echo 'checked out code'
-            }
-        stage('Build'){
-            steps {
+                }
+           }  
+         stage('Build'){
+             steps {
                 echo 'Building api application'
                 sh '''
                 cd /api
@@ -22,4 +23,3 @@ pipeline{
             }
         }
     }
-}
