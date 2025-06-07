@@ -29,7 +29,7 @@ pipeline{
                     docker run --rm -v $(pwd):/usr/src/app -w /usr/src/app sonarsource/sonar-scanner-cli \
                     -Dsonar.projectKey=flask_app \
                     -Dsonar.sources=. \
-                    -Dsonar.host.url=http://your-sonarqube-server:9000 \
+                    -Dsonar.host.url=http://sonarqube.jenkinsgui.westeurope.cloudapp.azure.com \
                     -Dsonar.login=sonarqube-token
                 '''
                 }
