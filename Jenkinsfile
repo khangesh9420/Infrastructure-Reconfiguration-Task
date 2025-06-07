@@ -17,7 +17,8 @@ pipeline{
                 echo 'Building api application'
                 sh '''
                     ls -la
-                    cd ~/api
+                    pwd
+                    cd api
                     docker build -t ${DOCKER_REGISTRY}/flask_app:${BUILD_TAG} .
                 '''
                  }
