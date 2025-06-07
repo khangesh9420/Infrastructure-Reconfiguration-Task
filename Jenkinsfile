@@ -32,6 +32,8 @@ pipeline{
                     -Dsonar.host.url=http://your-sonarqube-server:9000 \
                     -Dsonar.login=your-sonarqube-token
                 '''
+                }
             }
         }
     }
+    
