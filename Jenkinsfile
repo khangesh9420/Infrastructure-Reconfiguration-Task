@@ -1,4 +1,4 @@
-pipeline{
+pipeline {
     agent { label 'azureagent' }
     environment {
         DOCKER_REGISTRY = 'khangeshmatte123'
@@ -9,9 +9,9 @@ pipeline{
             steps {
                 checkout scm
                 echo 'checked out code'
-                }
-           }  
-        stage('Build'){
+            }
+        }
+        stage('Build') {
             steps {
                 echo 'Building api application'
                 sh '''
@@ -20,24 +20,24 @@ pipeline{
                     cd api
                     docker build -t ${DOCKER_REGISTRY}/flask_app:${BUILD_TAG} .
                 '''
-                }
             }
+        }
         stage('Test') {	
             environment {
                 SONAR_HOST_URL = 'http://108.142.232.37:9000'
             }
             steps {
-                withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')])
-                sh '''
-                    echo 'Running static code analysis using sonarqube'
-                    docker run --rm -v $(pwd):/usr/src/app -w /usr/src/app sonarsource/sonar-scanner-cli \
-                    -Dsonar.projectKey=flask_app \
-                    -Dsonar.sources=. \
-                    -Dsonar.host.url=${SONAR_HOST_URL} \
-                    -Dsonar.login=sonarqube-token
-                '''
+                withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
+                    sh """
+                        echo 'Running static code analysis using SonarQube'
+                        docker run --rm -v ${env.WORKSPACE}:/usr/src/app -w /usr/src/app sonarsource/sonar-scanner-cli \
+                        -Dsonar.projectKey=flask_app \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=${SONAR_HOST_URL} \
+                        -Dsonar.login=${SONAR_TOKEN}
+                    """
                 }
             }
         }
     }
-    
+}
