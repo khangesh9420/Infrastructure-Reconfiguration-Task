@@ -39,5 +39,25 @@ pipeline {
                 }
             }
         }
+        stage('Push') {
+            steps {
+                echo 'Pushing image to Docker registry'
+                withCredentials([usernamePassword(credentialsId: 'docker-creds', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    sh '''
+                        echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+                        docker push ${DOCKER_REGISTRY}/flask_app:${BUILD_TAG}
+                    '''
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application'
+                sh '''
+                    docker pull ${DOCKER_REGISTRY}/flask_app:${BUILD_TAG}
+                    docker run -d -p 5000:5000 ${DOCKER_REGISTRY}/flask_app:${BUILD_TAG}
+                '''
+            }
+        }
     }
 }
