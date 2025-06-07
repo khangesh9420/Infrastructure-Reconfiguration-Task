@@ -23,13 +23,17 @@ pipeline{
                 }
             }
         stage('Test') {	
+            environment {
+                SONAR_HOST_URL = 'http://108.142.232.37:9000'
+            }
             steps {
-                echo 'Rinnung test and static code analysis using sonarqube'
+                withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')])
                 sh '''
+                    echo 'Running static code analysis using sonarqube'
                     docker run --rm -v $(pwd):/usr/src/app -w /usr/src/app sonarsource/sonar-scanner-cli \
                     -Dsonar.projectKey=flask_app \
                     -Dsonar.sources=. \
-                    -Dsonar.host.url=http://108.142.232.37:9000 \
+                    -Dsonar.host.url=${SONAR_HOST_URL} \
                     -Dsonar.login=sonarqube-token
                 '''
                 }
