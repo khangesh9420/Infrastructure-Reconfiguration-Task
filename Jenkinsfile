@@ -16,8 +16,8 @@ pipeline{
              steps {
                 echo 'Building api application'
                 sh '''
-                cd /api
-                docker build -t ${DOCKER_REGISTRY}/flask_app:${BUILD_TAG} .
+                    cd ~/api
+                    docker build -t ${DOCKER_REGISTRY}/flask_app:${BUILD_TAG} .
                 '''
                  }
             }
