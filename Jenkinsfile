@@ -56,7 +56,7 @@ pipeline {
                 sh '''
                     docker pull ${DOCKER_REGISTRY}/flask_app:${BUILD_TAG}
                     docker rm -f flask_app || true
-                    docker run -d -p 5000:5000 ${DOCKER_REGISTRY}/flask_app:${BUILD_TAG}
+                    docker run -d --name flask_app -p 5000:5000 ${DOCKER_REGISTRY}/flask_app:${BUILD_TAG}
                 '''
             }
         }
