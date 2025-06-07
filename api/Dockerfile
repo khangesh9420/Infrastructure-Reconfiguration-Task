@@ -1,6 +1,6 @@
 FROM python:3.11-slim AS build
 
-WORKDIR app
+WORKDIR /app
 
 COPY . .
 
