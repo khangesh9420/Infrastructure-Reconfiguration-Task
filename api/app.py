@@ -10,6 +10,7 @@ def home():
     <ul>
         <li><a href="/about">About</a></li>
         <li><a href="/devops">DevOps Introduction</a></li>
+        <li><a href="/find">Find New Tools</a></li>
         <li><a href="/api/message">API Message (JSON)</a></li>
     </ul>
     """
@@ -34,6 +35,20 @@ def devops_intro():
         <li>Continuous Delivery/Deployment (CD)</li>
         <li>Infrastructure as Code</li>
         <li>Monitoring and Logging</li>
+    </ul>
+    <a href="/">Back to Home</a>
+    """
+@app.route('/find')
+def find():
+    return """
+    <h1>Find New Tools</h1>
+    <p>There are alwys New tools are present in the market specially cloud native tools.</p>
+    <p>Its goal is to spread knowledge about new tools.</p>
+    <ul>
+        <li>K8 (CI)</li>
+        <li>ArgocCD (CD)</li>
+        <li>Terraform</li>
+        <li> prometheus + Grafana</li>
     </ul>
     <a href="/">Back to Home</a>
     """
